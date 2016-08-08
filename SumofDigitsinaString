@@ -1,0 +1,34 @@
+
+
+import java.util.Scanner;
+
+public class SumofDigitsinaString {
+
+	public static void main(String[] args) {
+		
+		Scanner s = new Scanner(System.in);
+		String s1 = s.next();
+		System.out.println(UserMainCode.getvalues(s1));
+		s.close();
+	}
+
+}
+
+class UserMainCode {
+	public static int getvalues(String s1) {
+		int sum =0;
+		
+		char[] c = s1.toCharArray();
+
+		for (char c1 : c) {
+			if (Character.isDigit(c1)) {
+				sum = sum + Character.getNumericValue(c1);
+			}
+		}
+		if(sum>0)
+			return sum ;
+		else
+		return -1;
+
+	}
+}

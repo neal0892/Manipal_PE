@@ -1,0 +1,38 @@
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Differencebetweenlargestandsmallestelements {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int[] s = new int[n];
+		for (int i = 0; i < n; i++) {
+			s[i] = Integer.parseInt(br.readLine());
+		}
+		System.out.println(userMainCode.display(s));
+	}
+
+}
+
+class userMainCode {
+
+	public static int display(int[] a) {
+		int n = a.length;
+		List<Integer> b = new ArrayList<Integer>();
+		for (int c : a) {
+			b.add(c);
+		}
+		Collections.sort(b);
+		if (n == 1)
+			return b.get(0);
+		else
+			return b.get(n - 1) - b.get(0);
+
+	}
+}

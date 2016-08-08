@@ -1,5 +1,3 @@
-package practisePE;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,20 +12,20 @@ public class GetElementPosition {
 		String[] strings = new String[size];
 
 		for (int i = 0; i < size; i++) {
-			strings[i] = s.next();
+			strings[i] = s.next();  //THE Strings are stored in an String array of the name strings
 		}
-		String toFind = s.next();
+		String toFind = s.next();  //the strind whose index we have to find
 		int k = getElementPosition(strings, toFind);
 		System.out.println(k);
 	}
 
 	public static int getElementPosition(String[] strings, String b) {
 
-		List<String> list = Arrays.asList(strings);
-		Collections.sort(list);
-		Collections.reverse(list);
+		List<String> list = Arrays.asList(strings); //Storing the string array into an list type variable
+		Collections.sort(list); //sorting the list 
+		Collections.reverse(list); // reverse the list // we used list so that we can use the methods of collections like sort and reverse
 
-		return list.indexOf(b);
+		return list.indexOf(b)+1; //returns the index of string b in the list 
 
 	}
 }

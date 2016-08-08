@@ -25,7 +25,16 @@ public class GetElementPosition {
 		Collections.sort(list); //sorting the list 
 		Collections.reverse(list); // reverse the list // we used list so that we can use the methods of collections like sort and reverse
 
-		return list.indexOf(b)+1; //returns the index of string b in the list 
+	int count=1;
+		for(String o:arr)
+		{
+			if(o.equals(b))
+			{
+				break;
+			}
+			count++;
+		}
+		return (count);
 
 	}
 }

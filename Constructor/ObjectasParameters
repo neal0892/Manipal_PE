@@ -1,0 +1,34 @@
+package practisePE;
+
+import java.util.Scanner;
+
+public class Test {
+	int i;
+	int j;
+
+	public Test(int a, int b) {
+		i = a;
+		j = b;
+	}
+
+	public boolean isEquals(Test o) {
+		if (o.i == i && o.j == j)
+			return true;
+		else
+			return false;
+	}
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter the parameter one after other");
+		int a = s.nextInt();
+		int b = s.nextInt();
+		Test t1 = new Test(a, b);
+		Test t2 = new Test(1, 3);
+		Test t3 = new Test(1, 2);
+		System.out.println(t1.isEquals(t2));
+		System.out.println(t1.isEquals(t3));
+
+	}
+
+}

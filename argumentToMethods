@@ -1,0 +1,40 @@
+package practisePE;
+
+public class Test {
+	int i;
+	int j;
+
+	public Test(int a, int b) {
+		i = a;
+		j = b;
+	}
+
+	public boolean isEquals(Test o) {
+		if (o.i == i && o.j == j)
+			return true;
+		else
+			return false;
+	}
+
+	public void meth(int a, int b) { // primitives are passed by value
+		a *= 20;
+		b /= 10;
+	}
+
+	public void meth2(Test a) { //object are passed by reference 
+		a.i *= 10;
+		a.j /= 20;
+	}
+
+	public static void main(String[] args) {
+
+		Test a = new Test(60, 30);
+		Test b = new Test(60, 30);
+
+		a.meth(20, 10);
+		b.meth2(b);
+		System.out.println(a.i + " " + a.j);
+		System.out.println(b.i + " " + b.j);
+	}
+
+}

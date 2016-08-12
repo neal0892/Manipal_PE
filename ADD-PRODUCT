@@ -1,0 +1,218 @@
+//HMTL CODE AS THE INDEX OR THE WELCOME PAGE
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Product</title>
+</head>
+<body>
+	<form method='post' action="cart" >// In action , keep the link of the servelet link (1)
+		<table>
+		
+			<tr>
+				<td>Product Id</td>
+				<td><input type='text' name='prodId'/></td>
+			</tr>
+			<tr>
+				<td>Product Name</td>
+				<td><input type='text' name='prodName'/></td>
+			</tr>
+			<tr>
+				<td>Product Category</td>
+				<td><select name = 'prodCategory'>
+					<option>Electronics</option>
+					<option>Stationary</option>
+					<option>Fashion</option>
+					<option>Toys</option>
+				</select>
+			</tr>
+			<tr>
+				<td>Product Price</td>
+				<td><input type='text' name='prodPrice'/></td>
+			</tr>
+			<tr>
+			<td><input type='submit' value ='Add To Cart'/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+
+//SERVLET CODE FOR THE SAME 
+//COMMENTED FOR EXPLANATION
+
+package com.shopping.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.shopping.model.Product;
+
+
+@WebServlet("/cart") // Link added with the servlet (1)
+public class AddToCart extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {//do post is method inherited from http servlet
+																														//it requites two parameters 1)request 2)response
+		
+		//bind to a session
+		HttpSession session = request.getSession(); // session object created 
+		
+		ArrayList<Product> cart = (ArrayList<Product>) session.getAttribute("cart"); //creating arraylist to store product in list /to display multiplevalue
+		
+		if(cart == null){
+			cart = new ArrayList<>();//to create a new cart as it is null
+		}
+		//Get parameters from the form
+		
+		int prodId = Integer.parseInt(request.getParameter("prodId"));    /* Getting params from the html form
+		String prodName = request.getParameter("prodName");
+		String prodCategory = request.getParameter("prodCategory");
+		double prodPrice = Double.parseDouble(request.getParameter("prodPrice"));
+		
+		//create a product object
+		Product prod = new Product(prodId, prodName, prodCategory, prodPrice);
+		
+		
+		//****Add the product to cart and bind cart to session
+		cart.add(prod);
+		session.setAttribute("cart", cart);/ setting attributes so that we can use it further
+		
+		//set this object as request attribute
+		request.setAttribute("myprod", prod); //
+		request.setAttribute("msg", "Product is added to Cart");
+		
+		//Forward the request to displayCart.jsp
+		RequestDispatcher rd = request.getRequestDispatcher("displayProductEl.jsp"); //FORWARDING REQUEST FROM HTML TO SERVELET TO JSP//CREATED A REQUEST
+		rd.forward(request, response);// FORWARDING THE REQUEST 
+	}
+
+}
+//JSP PRODUCTWISE
+
+<%@page import="com.shopping.model.Product"%> //importing product class
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"
+    errorPage="appError.jsp"
+    %>
+<!DOCTYPE html>
+<html>
+<head>
+<title>AddProduct</title>
+<link href='shopping.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<%@include file='header.html' %>//including the header file
+
+	<%-- <jsp:useBean id="myprod1" class="com.shopping.model.Product" scope ="request"></jsp:useBean> --%>
+	
+	<table>
+		<caption>Product Details</caption>
+		
+		<tr>
+			<td>Product ID</td>
+			<td>${myprod.prodId}</td>
+		</tr>
+		<tr>
+			<td>Product Name</td>
+			<td>${myprod.prodName}</td>
+		</tr>
+		<tr>
+			<td>Product Category</td>
+			<td>${myprod.prodCategory}</td>
+		</tr>
+		<tr>
+			<td>Product Price</td>
+			<td>${myprod.prodPrice}</td>
+		</tr>
+		
+	</table>
+	<div>
+		<a href = "addProduct.html">Continue Shopping</a>
+		<a href = "displayCart.jsp">Show Cart</a>
+	</div>
+	<h4>${msg}</h4>
+	<%-- <h3>Total amount of 25 Pens is Rs.${myprod.prodPrice * 25}/-</h3> --%>
+	
+	<jsp:include page = 'footer.jsp'> 
+		<jsp:param value="Displaying Product Information" name="xyz"/>
+	</jsp:include>
+</body>
+
+</html>
+
+// JSP FOR THE ENTIRE CART AFTER ALL THE PRODUCTS ARE ADDED 
+
+
+<%@page import="com.shopping.model.Product"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"
+    errorPage="appError.jsp"
+    %>
+    <%@taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<title>AddProduct</title>
+<link href='shopping.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<%@include file='header.html' %>
+<!-- 
+Create html table with header for the product
+In a scriplet get the product forwarded by Servlet
+Use expression to display the product details in the first row
+ -->
+
+	<%-- <jsp:useBean id="myprod1" class="com.shopping.model.Product" scope ="request"></jsp:useBean> --%>
+	<c:if test="${empty cart }">
+		<h3>Stupid Fellow...  Cart is Empty, Please Add Items</h3>
+	</c:if>
+	
+	<table >
+		<caption>Product Details</caption>
+		<tr>
+			<th>Product Id</th>
+			<th>Product Name</th>
+			<th>Product Category</th>
+			<th>Product Price</th>
+			<th>Remove Link</th>
+		</tr>
+	<c:if test="${not empty cart }">
+		<c:forEach items = "${cart}" var = "myprod"
+					varStatus = "status">
+			<tr>
+				<td>${myprod.prodId}</td>
+				<td>${myprod.prodName}</td>
+				<td>${myprod.prodCategory}</td>
+				<td>${myprod.prodPrice}</td>
+				<td><a href = "RemoveCart.java">Remove Product</a></td>
+			</tr>
+		</c:forEach>
+	</c:if>
+	</table>
+	<div>
+		<a href = "addProduct.html">Continue Shopping</a>
+		<a href = "displayCart.jsp">Show Cart</a>
+	</div>
+	
+	<%-- <h4>${msg}</h4>
+	<h3>Total amount of 25 Pens is Rs.${myprod.prodPrice * 25}/-</h3> --%>
+	
+	<jsp:include page = 'footer.jsp'> 
+		<jsp:param value="Displaying Product Information" name="xyz"/>
+	</jsp:include>
+</body>
+
+</html>

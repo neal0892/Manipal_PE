@@ -1,0 +1,21 @@
+
+import java.util.Scanner;
+
+public class ReverseSubString {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String input = s.next();
+		int index = s.nextInt();
+		int len = s.nextInt();
+		String otpt = retrieveString(input, index, len);
+		System.out.println(otpt);
+	}
+	public static String retrieveString(String input1, int input2, int input3) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(input1);
+		sb = sb.reverse();
+		return sb.substring(input2, input2 + input3);
+	}
+
+}

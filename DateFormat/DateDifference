@@ -1,0 +1,32 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public class Differencebetweendatesdays {
+	
+	public static int getDateDifference(String s1,String s2) throws ParseException
+	{
+		SimpleDateFormat d1 = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+		Date date1 = d1.parse(s1);
+		Date date2 = d1.parse(s2);
+		int d3 = (int) (date2.getTime()-date1.getTime());
+		return (int) TimeUnit.DAYS.convert(d3, TimeUnit.MILLISECONDS);
+		
+	}
+	
+	
+	public static void main(String[] args) throws ParseException {
+	
+		Scanner sc= new Scanner(System.in);
+		 String s1=sc.nextLine();
+		 String s2=sc.nextLine();
+		 System.out.println(getDateDifference(s1,s2));
+	}
+	
+	
+
+}

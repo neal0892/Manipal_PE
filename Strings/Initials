@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class InitialFormat {
+		
+	public static void main(String[] args) {
+	
+		Scanner s = new Scanner(System.in);
+		String fullName = s.nextLine();
+		System.out.println(nameFormatter(fullName));
+		
+		s.close();
+		
+	}
+public static String nameFormatter(String s1)
+{
+	String[] splitted = s1.split("\\s+");
+	return splitted[splitted.length-1]+", "+splitted[0].charAt(0);
+
+}
+}

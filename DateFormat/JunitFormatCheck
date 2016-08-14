@@ -1,0 +1,26 @@
+import org.junit.*;
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+/**
+ * Unit tests for the Testjava
+ */
+
+public class ValidDateTest{
+
+    @Test
+    public void test_Simple()
+    {
+    try{
+    	ValidDate v = new ValidDate();
+        assertEquals(v.getValues("12.03.2012"),"Valid");
+    
+    }
+    catch(Exception e){
+    }
+    }
+    
+   
+}

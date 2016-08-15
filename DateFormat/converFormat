@@ -1,0 +1,24 @@
+package techAd_practise;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class DateFormatConversion {
+
+	public static void main(String[] args) throws ParseException {
+		Scanner s = new Scanner(System.in);
+		String date1 = s.next();
+		System.out.println(converDateFormat(date1));
+	}
+
+	public static String converDateFormat(String s) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date d1 = sdf.parse(s);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yy");
+		String datecChanged = sdf1.format(d1);
+		return datecChanged;
+
+	}
+}

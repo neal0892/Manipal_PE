@@ -1,0 +1,40 @@
+package techAd_practise;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+public class NewYearday {
+
+	public static void main(String[] args) throws ParseException {
+
+		Scanner sc = new Scanner(System.in);
+		String s1 = sc.nextLine();
+		System.out.println(nextYearDay(s1));
+	}
+
+	public static String nextYearDay(String s1) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		Date d1 = sdf.parse(s1);
+		Calendar c = Calendar.getInstance();
+		c.setTime(d1);
+		c.add(Calendar.YEAR, 1);
+		int a = c.get(c.DAY_OF_WEEK);
+		if (a == 1)
+			return "sunday";
+		else if (a == 2)
+			return "monday";
+		else if (a == 3)
+			return "tuesday";
+		else if (a == 4)
+			return "wednesday";
+		else if (a == 5)
+			return "thursday";
+		else if (a == 6)
+			return "friday";
+		else
+			return "saturday";
+	}
+}

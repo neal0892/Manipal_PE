@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class OddDigitSum {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int size = s.nextInt();
+		String[] entry = new String[size];
+		for (int i = 0; i < size; i++) {
+			entry[i] = s.next();
+		}
+		int sum = UserMainCodeOdd.oddDigitSum(entry, size);
+		System.out.println(sum);
+
+	}
+
+}
+
+class UserMainCodeOdd {
+	public static int oddDigitSum(String[] s1, int size) {
+		int sum = 0;
+		for (String s : s1) {
+			String numberOnlu = s.replaceAll("[^0-9]", "");
+			char[] c = numberOnlu.toCharArray();
+			for (char c1 : c) {
+				int temp = c1 - '0';
+				if (temp % 2 != 0) {
+					sum += temp;
+				}
+			}
+
+		}
+		return sum;
+	}
+}

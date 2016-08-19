@@ -1,0 +1,40 @@
+package practisePE;
+
+import java.text.ParseException;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class SimpleStringManipulationII {
+
+	public static void main(String[] args) throws ParseException {
+		Scanner s = new Scanner(System.in);
+		String n = s.nextLine();
+		int c = UserMainCode12323.calculateWordSum(n);
+		System.out.println(c);
+	}
+
+}
+
+class UserMainCode12323 {
+
+	public static int calculateWordSum(String inp) throws ParseException {
+
+		StringTokenizer sc = new StringTokenizer(inp, " ");
+
+		String s1 = sc.nextToken();
+		String s2 = "";
+		while (sc.hasMoreTokens()) {
+			s2 = sc.nextToken();
+		}
+		if (s1.equalsIgnoreCase(s2))
+			return s1.length();
+		else
+			return s1.length() + s2.length();
+
+		/*
+		 * SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		 * sdf.setLenient(false); Date d1 = sdf.parse(inp);
+		 * System.out.println(d1); return 0;
+		 */
+	}
+}

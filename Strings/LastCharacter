@@ -1,0 +1,35 @@
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class LastLetters {
+
+	public static void main(String[] args) {
+	
+		Scanner s = new Scanner(System.in);
+		String input = s.nextLine();
+		//Function called to carry out the required function , String is passed as argument 
+		System.out.print(Usermaincode234.getLastLetter(input));
+	}
+}
+
+class Usermaincode234 {
+
+	public static String getLastLetter(String input) {
+		int count = 0; //count is used to count number of iterations 
+		String s1 = "";//declared and initialised a string
+		StringTokenizer stk = new StringTokenizer(input, " "); //tokenizer used to create separate tokens ie string of a sentence ,space is delimiter
+		int count1 = stk.countTokens();//to count number of tokens created 
+		while (stk.hasMoreTokens()) {
+			String s = stk.nextToken();//tokenizer iterator
+			char c = Character.toUpperCase(s.charAt(s.length() - 1)); //extracted the last word of each string and upper cased it 
+			++count; //count to keep track the number of loops
+			if (count == count1) //if reached the last element
+				s1 = s1 + c; //dont add any "$" sign
+			else
+				s1 = s1 + c + "$"; //add $ in between the characters
+
+		}
+		// String reverse = new StringBuffer(s1).reverse().toString();
+		return s1; //returned the string so formed to main
+	}
+}

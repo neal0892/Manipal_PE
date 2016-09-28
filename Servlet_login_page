@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet
 		String uname=req.getParameter("uname");
 		String pass=req.getParameter("pass");
 		
-		PrintWriter out=resp.getWriter();
+		PrintWriter out=resp.getWriter();//
 		
 		
 		if(UserDao.isValidUser(uname, pass)){
